@@ -2,6 +2,7 @@ using Application.Interfaces;
 using Application.Services;
 using Domain.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Messaging;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,9 +21,26 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Repositorios
 builder.Services.AddScoped<IBeneficiarioRepository, BeneficiarioRepository>();
+builder.Services.AddScoped<ISolicitudRepository, SolicitudRepository>();
+
 
 // Servicios de Application
 builder.Services.AddScoped<IBeneficiarioService, BeneficiarioService>();
+builder.Services.AddScoped<ISolicitudService, SolicitudService>();
+
+
+builder.Services.AddSingleton<IMessagePublisher, RabbitMqPublisher>();
+
+//----------- CORS para Angular -----------//
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -36,7 +54,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowAngular");
 app.UseAuthorization();
 
 app.MapControllers();

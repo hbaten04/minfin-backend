@@ -29,10 +29,10 @@ namespace Application.DTOs
         string Nombre,
         string Apellido,
         string Cui,
-        FuenteFinanciamientoDto FuenteFinanciamiento,
-        EstructuraPresupuestariaDto EstructuraPresupuestaria,
-        List<CuentaResponseDto> Cuentas,
-        List<DocumentoRespaldoResponseDto> DocumentosRespaldo
+        FuenteFinanciamientoDto? FuenteFinanciamiento,
+        EstructuraPresupuestariaDto? EstructuraPresupuestaria,
+        List<CuentaResponseDto>? Cuentas,
+        List<DocumentoRespaldoResponseDto>? DocumentosRespaldo
     );
 
     public record CuentaResponseDto(
