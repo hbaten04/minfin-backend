@@ -33,9 +33,10 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<Beneficiario?> GetByIdAsync(int id)
+        public async Task<Beneficiario?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var beneficiario = await _repository.GetByIdAsync(id);
+            return beneficiario is null ? null : beneficiario;
         }
 
         public Task<bool> UpdateAsync(Beneficiario beneficiario)

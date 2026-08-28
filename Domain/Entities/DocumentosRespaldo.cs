@@ -10,7 +10,7 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public int BeneficiarioId { get; set; }
-        public Beneficiario Beneficiario { get; set; }
+        public int? BeneficiarioId { get; set; }
+        public Beneficiario? Beneficiario { get; set; }
     }
 }
