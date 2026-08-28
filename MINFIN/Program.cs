@@ -23,8 +23,6 @@ builder.Services.AddScoped<IBeneficiarioRepository, BeneficiarioRepository>();
 // Servicios de Application
 builder.Services.AddScoped<IBeneficiarioService, BeneficiarioService>();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 
 
