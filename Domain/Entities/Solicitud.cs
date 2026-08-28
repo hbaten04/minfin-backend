@@ -9,7 +9,7 @@ namespace Domain.Entities
     public class Solicitud
     {
         public int Id { get; set; }
-        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaCreacion { get; set; } = DateTime.Now;
         public decimal Monto { get; set; }
         public string Moneda { get; set; }
 

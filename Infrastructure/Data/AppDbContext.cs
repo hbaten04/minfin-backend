@@ -15,6 +15,8 @@ namespace Infrastructure.Data
         public DbSet<FuenteFinanciamiento> FuentesFinanciamiento { get; set; }
         public DbSet<EstructuraPresupuestaria> EstructurasPresupuestarias { get; set; }
         public DbSet<DocumentosRespaldo> DocumentosRespaldo { get; set; }
+        public DbSet<Solicitud> Solicitud { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
