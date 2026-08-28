@@ -1,0 +1,6 @@
+@MINFIN_HostAddress = http://localhost:5118
+
+GET {{MINFIN_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
