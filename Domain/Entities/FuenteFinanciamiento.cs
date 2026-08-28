@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Beneficiario
+    public class FuenteFinanciamiento
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Cui { get; set; }
+        public string Descripcion { get; set; }
     }
 }

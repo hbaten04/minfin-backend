@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Beneficiario
+    public class CuentaBancaria
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Cui { get; set; }
+        public string NumeroCuenta { get; set; }
+        public string Proposito { get; set; }
     }
 }
