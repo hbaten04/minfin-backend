@@ -11,8 +11,8 @@ namespace Domain.Entities
         public int Id { get; set; }
         public string NumeroCuenta { get; set; }
         public string Proposito { get; set; }
-        public int BeneficiarioId { get; set; }
-        public Beneficiario Beneficiario { get; set; }
+        public int? BeneficiarioId { get; set; }
+        public Beneficiario? Beneficiario { get; set; }
 
     }
 }

@@ -10,6 +10,6 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public ICollection<Beneficiario> Beneficiarios { get; set; } = new List<Beneficiario>();
+        public ICollection<Beneficiario>? Beneficiarios { get; set; } = new List<Beneficiario>();
     }
 }

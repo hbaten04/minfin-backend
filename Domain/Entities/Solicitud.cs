@@ -12,6 +12,10 @@ namespace Domain.Entities
         public DateTime FechaCreacion { get; set; }
         public decimal Monto { get; set; }
         public string Moneda { get; set; }
-        public Beneficiario Beneficiario { get; set; }
+
+        public int? BeneficiarioId { get; set; }
+
+        public Beneficiario? Beneficiario { get; set; }
     }
+
 }

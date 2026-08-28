@@ -39,10 +39,8 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Beneficiario?> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Beneficiario?> GetByIdAsync(int id) =>
+            await _context.Beneficiarios.FindAsync(id);
 
         public Task<bool> UpdateAsync(Beneficiario beneficiario)
         {
