@@ -25,6 +25,21 @@ namespace Infrastructure.Repositories
             return solicitud;
         }
 
+        public async Task<IEnumerable<Solicitud>> GetAllAsync()
+        {
+
+            return await _context.Solicitud
+        .Include(s => s.Beneficiario)
+            .ThenInclude(b => b.FuenteFinanciamiento)
+        .Include(s => s.Beneficiario)
+            .ThenInclude(b => b.EstructuraPresupuestaria)
+        .Include(s => s.Beneficiario)
+            .ThenInclude(b => b.Cuentas)
+        .Include(s => s.Beneficiario)
+            .ThenInclude(b => b.DocumentosRespaldo)
+        .ToListAsync();
+
+        }
         public async Task<Solicitud?> GetByIdAsync(int id) =>
            await _context.Solicitud.FindAsync(id);
     }

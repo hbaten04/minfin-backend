@@ -77,5 +77,11 @@ namespace MINFIN.Controllers
             return cliente is null ? NotFound() : Ok(cliente);
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<SolicitudResponseDto>>> Get()
+        {
+            var solicitudes = await _service.GetAllAsync();
+            return Ok(solicitudes);
+        }
     }
 }

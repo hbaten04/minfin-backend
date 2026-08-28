@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.DTOs;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Application.Interfaces
     {
         Task<Solicitud> CreateAsync(Solicitud solicitud);
         Task<Solicitud?> GetByIdAsync(int id);
+        Task<IEnumerable<SolicitudResponseDto>> GetAllAsync();
     }
 }
