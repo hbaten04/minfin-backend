@@ -13,7 +13,7 @@ namespace Domain.Interfaces
         Task<Beneficiario?> GetByIdAsync(int id);
         Task<Beneficiario> AddAsync(Beneficiario beneficiario);
         Task<bool> UpdateAsync(Beneficiario beneficiario);
-        Task<bool> DeleteAsync(int id);
+        Task DeleteAsync(Beneficiario beneficiario);
         Task<bool> ExistsAsync(int id);
     }
 }

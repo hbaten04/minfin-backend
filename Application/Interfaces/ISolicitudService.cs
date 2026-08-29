@@ -13,5 +13,7 @@ namespace Application.Interfaces
         Task<Solicitud> CreateAsync(Solicitud solicitud);
         Task<Solicitud?> GetByIdAsync(int id);
         Task<IEnumerable<SolicitudResponseDto>> GetAllAsync();
+        Task<SolicitudResponseDto?> UpdateAsync(int id, SolicitudDto dto);
+        Task<bool> DeleteAsync(int id);
     }
 }

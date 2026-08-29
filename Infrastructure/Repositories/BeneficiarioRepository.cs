@@ -24,10 +24,18 @@ namespace Infrastructure.Repositories
             return beneficiario;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task DeleteAsync(Beneficiario beneficiario)
         {
-            throw new NotImplementedException();
+
+            if (beneficiario == null) return;
+
+            
+            _context.Beneficiarios.Attach(beneficiario);
+
+            _context.Beneficiarios.Remove(beneficiario);
+            await _context.SaveChangesAsync();
         }
+
 
         public Task<bool> ExistsAsync(int id)
         {

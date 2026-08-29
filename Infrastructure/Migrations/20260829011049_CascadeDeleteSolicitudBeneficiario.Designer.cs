@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260829011049_CascadeDeleteSolicitudBeneficiario")]
+    partial class CascadeDeleteSolicitudBeneficiario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,9 +153,6 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("BeneficiarioId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BeneficiarioId1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
@@ -165,11 +165,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BeneficiarioId")
-                        .IsUnique()
-                        .HasFilter("[BeneficiarioId] IS NOT NULL");
-
-                    b.HasIndex("BeneficiarioId1");
+                    b.HasIndex("BeneficiarioId");
 
                     b.ToTable("Solicitud");
                 });
@@ -210,13 +206,9 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Solicitud", b =>
                 {
                     b.HasOne("Domain.Entities.Beneficiario", "Beneficiario")
-                        .WithOne()
-                        .HasForeignKey("Domain.Entities.Solicitud", "BeneficiarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Entities.Beneficiario", null)
                         .WithMany("Solicitudes")
-                        .HasForeignKey("BeneficiarioId1");
+                        .HasForeignKey("BeneficiarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Beneficiario");
                 });
