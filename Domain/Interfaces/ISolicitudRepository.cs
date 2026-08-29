@@ -12,5 +12,7 @@ namespace Domain.Interfaces
         Task<Solicitud> AddAsync(Solicitud solicitud);
         Task<Solicitud?> GetByIdAsync(int id);
         Task<IEnumerable<Solicitud>> GetAllAsync();
+        Task UpdateAsync(Solicitud solicitud);
+        Task DeleteAsync(Solicitud solicitud);
     }
 }

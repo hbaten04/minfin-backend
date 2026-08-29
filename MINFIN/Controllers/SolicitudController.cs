@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Application.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -51,19 +52,19 @@ namespace MINFIN.Controllers
                 creado.Monto,
                 creado.Moneda,
                 new BeneficiarioResponseDto(
-    creado.Beneficiario.Id,
-    creado.Beneficiario.Nombre,
-    creado.Beneficiario.Apellido,
-    creado.Beneficiario.Cui,
-    creado.Beneficiario.FuenteFinanciamientoId.HasValue
-        ? new FuenteFinanciamientoDto(creado.Beneficiario.FuenteFinanciamientoId.Value, "")
-        : null,
-    creado.Beneficiario.EstructuraPresupuestariaId.HasValue
-        ? new EstructuraPresupuestariaDto(creado.Beneficiario.EstructuraPresupuestariaId.Value, "")
-        : null,
-    creado.Beneficiario.Cuentas.Select(c => new CuentaResponseDto(c.Id, c.NumeroCuenta, c.Proposito)).ToList(),
-    creado.Beneficiario.DocumentosRespaldo.Select(d => new DocumentoRespaldoResponseDto(d.Id, d.Descripcion)).ToList()
-)
+                        creado.Beneficiario.Id,
+                        creado.Beneficiario.Nombre,
+                        creado.Beneficiario.Apellido,
+                        creado.Beneficiario.Cui,
+                        creado.Beneficiario.FuenteFinanciamientoId.HasValue
+                            ? new FuenteFinanciamientoDto(creado.Beneficiario.FuenteFinanciamientoId.Value, "")
+                            : null,
+                        creado.Beneficiario.EstructuraPresupuestariaId.HasValue
+                            ? new EstructuraPresupuestariaDto(creado.Beneficiario.EstructuraPresupuestariaId.Value, "")
+                            : null,
+                        creado.Beneficiario.Cuentas.Select(c => new CuentaResponseDto(c.Id, c.NumeroCuenta, c.Proposito)).ToList(),
+                        creado.Beneficiario.DocumentosRespaldo.Select(d => new DocumentoRespaldoResponseDto(d.Id, d.Descripcion)).ToList()
+                 )
 
             );
 
@@ -83,5 +84,22 @@ namespace MINFIN.Controllers
             var solicitudes = await _service.GetAllAsync();
             return Ok(solicitudes);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] SolicitudDto solicitud)
+        {
+            await _service.UpdateAsync(id, solicitud);
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var eliminado = await _service.DeleteAsync(id);
+            if (!eliminado) return NotFound();
+
+            return NoContent();
+        }
+
+
     }
 }

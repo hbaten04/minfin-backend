@@ -40,7 +40,32 @@ namespace Infrastructure.Repositories
         .ToListAsync();
 
         }
-        public async Task<Solicitud?> GetByIdAsync(int id) =>
-           await _context.Solicitud.FindAsync(id);
+        public async Task<Solicitud?> GetByIdAsync(int id)
+        {
+            return await _context.Solicitud
+                .Include(s => s.Beneficiario)
+                    .ThenInclude(b => b.FuenteFinanciamiento)
+                .Include(s => s.Beneficiario)
+                    .ThenInclude(b => b.EstructuraPresupuestaria)
+                .Include(s => s.Beneficiario)
+                    .ThenInclude(b => b.Cuentas)
+                .Include(s => s.Beneficiario)
+                    .ThenInclude(b => b.DocumentosRespaldo)
+                .FirstOrDefaultAsync(s => s.Id == id);
+        }
+
+
+        public async Task UpdateAsync(Solicitud solicitud)
+        {
+            _context.Solicitud.Update(solicitud);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Solicitud solicitud)
+        {
+            _context.Solicitud.Remove(solicitud);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

@@ -43,10 +43,13 @@ namespace Infrastructure.Data
                 .HasForeignKey(b => b.EstructuraPresupuestariaId);
 
             // Beneficiario - DocumentosRespaldo (1:N)
-            modelBuilder.Entity<Beneficiario>()
-                .HasMany(b => b.DocumentosRespaldo)
-                .WithOne(d => d.Beneficiario)
-                .HasForeignKey(d => d.BeneficiarioId);
+            modelBuilder.Entity<Solicitud>()
+                .HasOne(s => s.Beneficiario)
+                .WithOne()
+                .HasForeignKey<Solicitud>(s => s.BeneficiarioId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
         }
     }
 }
